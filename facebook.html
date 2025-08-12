@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+    <style>
+        body {
+            background-color: gray;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div {
+            border: 4px solid black;
+            width: 350px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+        form label {
+            font-weight: bold;
+            display: block;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        form input {
+            width: 90%;
+            border-radius: 6px;
+            height: 30px;
+            padding: 8px;
+            margin-top: 10px;
+
+
+        }
+
+        button {
+            height: 40px;
+            width: 100%;
+            border-radius: 6px;
+            background-color: blue;
+            margin-top: 10px;
+            color: white;
+
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+
+        #mandatory {
+            color: red;
+
+        }
+
+        h1 {
+            color: blue;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <center>
+            <h1>Facebook login</h1>
+        </center>
+        <form action="">
+            <label for="Email">Email:<span id="mandatory">**</span></label>
+            <input type="Email" name="email" id="Email">
+            <span class="error" id="Eerror">enter Your Email</span>
+            <label for="Password">Password:<span id="mandatory">**</span></label>
+            <input type="password" name="Password" id="Password">
+            <span class="error" id="Perror">enter Your Password</span>
+            <button id="login">login</button>
+            <h3>forget password?<a href="signup.html">clickhere</a></h3>
+        </form>
+
+
+
+    </div>
+    <script>
+        document.getElementById("login").addEventListener("click", (event) => {
+            event.preventDefault()
+            let email = document.getElementById('Email').value;
+            console.log(email);
+            let password = document.getElementById('Password').value;
+            console.log(password);
+
+            if (email === "") {
+                document.getElementById('Eerror').style.display = 'block';
+            } else {
+                document.getElementById('Eerror').style.display = 'none';
+            }
+
+            if (password === "") {
+                document.getElementById('Perror').style.display = 'block';
+            } else {
+                document.getElementById('Perror').style.display = 'none';
+            }
+            if (email === '' || password === '') {
+                alert('email and password must be filled');
+            } else {
+                alert('login sucessfully\n Email:' + email + '\n Password:' + password);
+            }
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>
