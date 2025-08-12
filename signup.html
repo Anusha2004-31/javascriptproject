@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <style>
+        h1 {
+            color: red;
+            text-align: center;
+        }
+
+        body {
+            background-color: gray;
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+
+        }
+
+        .box {
+            border: 3px solid blue;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            background-color: white;
+        }
+
+        form label {
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+
+        }
+
+        form input {
+            width: 90%;
+            height: 30px;
+            border: 2px solid black;
+            border-radius: 6px;
+            margin-top: 20px;
+
+        }
+
+        button {
+            color: white;
+            background-color: blue;
+            width: 40%;
+            height: 30px;
+            border: 3px solid black;
+            font-weight: bold;
+            border-radius: 6px;
+            align-items: center;
+
+        }
+
+        #mandatory {
+            color: red;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>Signup</h1>
+
+
+        <form>
+            <label for="firstname">FIRST NAME:<span id="mandatory">**</span></label>
+            <input type="text" id="firstname"><br><br>
+
+            <label for="lastname">LAST NAME:<span id="mandatory">**</span></label>
+            <input type="text" id="lastname"><br><br>
+
+            <label for="email">YOUR EMAIL:<span id="mandatory">**</span></label>
+            <input type="email" id="email"><br><br>
+
+            <label for="password">PASSWORD:<span id="mandatory">**</span></label>
+            <input type="password" id="password"><br><br>
+
+            <label for="dob">Date of Birth:<span id="mandatory">**</span></label>
+            <input type="date" id="dob"><br><br>
+
+            <button type="submit" id="signup">Sign Up</button>
+            </center>
+        </form>
+
+    </div>
+    <script>
+
+        document.getElementById("signup").addEventListener("click", (event) => {
+            event.preventDefault();
+
+            let firstname = document.getElementById('firstname').value;
+            console.log("First Name:", firstname);
+
+            let lastname = document.getElementById('lastname').value;
+            console.log("Last Name:", lastname);
+
+            let email = document.getElementById('email').value;
+            console.log("Email:", email);
+
+            let password = document.getElementById('password').value;
+            console.log("Password:", password);
+
+            let dateofbirth = document.getElementById('dob').value;
+            console.log("Date of Birth:", dateofbirth);
+
+            alert("sigup sucessfully")
+        });
+
+    </script>
+</body>
+
+</html>
