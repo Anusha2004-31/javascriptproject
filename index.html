@@ -3,129 +3,165 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>To Do List Steps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
         body {
-            background: #f9c48d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: gray;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        .container {
-            background: #fff;
+        #loginpg {
+            border: 4px solid black;
+            width: 350px;
+            margin: 100px auto;
             padding: 20px;
-            border-radius: 12px;
-            width: 320px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            background-color: white;
         }
 
-        .input-area {
-            display: flex;
-            margin-bottom: 15px;
+        form label {
+            font-weight: bold;
+            display: block;
+            padding: 5px;
+            margin-top: 10px;
         }
 
-        .input-area input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
+        form input {
+            width: 90%;
+            border-radius: 6px;
+            height: 30px;
+            padding: 8px;
+            margin-top: 10px;
         }
 
-        .input-area button {
-            margin-left: 10px;
-            padding: 10px 15px;
-            border: none;
-            background: purple;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
+        button {
+            height: 40px;
+            width: 100%;
+            border-radius: 6px;
+            background-color: blue;
+            margin-top: 10px;
+            color: white;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
+        .error {
+            color: red;
+            display: none;
         }
 
-        li {
-            background: #f2f2f2;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        #mandatory {
+            color: red;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        #sign {
+            border: 4px solid black;
+            width: 350px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+        #sign {
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Enter task...">
-            <button id="addBtn">ADD</button>
-        </div>
-        <ul id="taskList"></ul>
+    <div id="loginpg">
+        <center>
+            <h1>FaceBook Login form</h1>
+        </center>
+        <form>
+            <label for="Email">Email:<span id="mandatory">**</span></label>
+            <input type="text" id="Email">
+            <span class="error" id="Eerror">Email is required</span>
+            <span class="error" id="Einvalid">Enter a valid Email (abc@domain.com)</span>
+
+            <label for="Password">Password:<span id="mandatory">**</span></label>
+            <input type="password" id="Password">
+            <span class="error" id="Perror">Password is required</span>
+            <span class="error" id="Pshort">Password must be at least 6 characters</span>
+
+            <button id="login">Login</button>
+            <h3>Forgot Password? <a href="#" id="forget">Click here</a></h3>
+        </form>
+    </div>
+
+    <div class="box" id="sign">
+        <h1>Signup</h1>
+        <form>
+            <label for="firstname">FIRST NAME:<span id="mandatory">**</span></label>
+            <input type="text" id="firstname"><br><br>
+
+            <label for="lastname">LAST NAME:<span id="mandatory">**</span></label>
+            <input type="text" id="lastname"><br><br>
+
+            <label for="email">YOUR EMAIL:<span id="mandatory">**</span></label>
+            <input type="email" id="email"><br><br>
+
+            <label for="password">PASSWORD:<span id="mandatory">**</span></label>
+            <input type="password" id="password"><br><br>
+
+            <label for="dob">Date of Birth:<span id="mandatory">**</span></label>
+            <input type="date" id="dob"><br><br>
+
+            <button type="submit" id="signup">Sign Up</button>
+        </form>
     </div>
 
     <script>
-        const input = document.getElementById("taskInput");
-        const addBtn = document.getElementById("addBtn");
-        const taskList = document.getElementById("taskList");
+        let loginpg = document.getElementById("loginpg");
 
-        let step = 1;
+        document.getElementById("login").addEventListener("click", (event) => {
+            event.preventDefault();
 
-        addBtn.addEventListener("click", () => {
-            if (step === 1) {
-                if (input.value.trim() === "") {
-                    alert("Enter a new Task");
-                    step = 2;
-                    loadStep2();
-                }
-            } else if (step === 2) {
-                if (input.value.trim() === "") {
-                    alert("Enter a new Task");
-                    return;
-                }
-                addTask(input.value.trim());
-                input.value = "";
+            let email = document.getElementById('Email').value.trim();
+            let password = document.getElementById('Password').value.trim();
+
+            let valid = true;
+            document.querySelectorAll(".error").forEach(el => el.style.display = "none");
+            if (email === "") {
+                document.getElementById('Eerror').style.display = 'block';
+                valid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('Einvalid').style.display = 'block';
+                valid = false;
+            }
+
+
+            if (password === "") {
+                document.getElementById('Perror').style.display = 'block';
+                valid = false;
+            } else if (password.length < 6) {
+                document.getElementById('Pshort').style.display = 'block';
+                valid = false;
+            }
+            if (valid) {
+                alert("Login Successful \nEmail: " + email + "\nPassword: " + password);
             }
         });
-        function addTask(text) {
-            const li = document.createElement("li");
-            const span = document.createElement("span");
-            span.textContent = text;
 
-            const delBtn = document.createElement("button");
-            delBtn.classList.add("delete-btn");
-            delBtn.textContent = "🗑️";
-
-            delBtn.addEventListener("click", () => {
-                li.remove();
-                if (step === 2) {
-                    step = 3;
-                    loadStep3();
-                }
-            });
-
-            li.appendChild(span);
-            li.appendChild(delBtn);
-            taskList.appendChild(li);
+        let forget = document.getElementById("forget");
+        forget.addEventListener("click", (events) => {
+            events.preventDefault();
+            let div = document.getElementById("sign");
+            div.style.display = "block";
+            loginpg.style.display = "none";
+        });
+        if (password === "") {
+            document.getElementById('Perror').style.display = 'block';
+            valid = false;
+        } else if (password.length < 6) {
+            document.getElementById('Pshort').style.display = 'block';
+            valid = false;
         }
 
-        function loadStep2() {
-            input.value = "";
-            taskList.innerHTML = "";
-            addTask("Go for walk @5pm");
-            addTask("Dinner @7pm");
-        }
-
-        function loadStep3() {
-            taskList.innerHTML = "";
-            addTask("Dinner @7pm");
-        }
     </script>
 </body>
 
